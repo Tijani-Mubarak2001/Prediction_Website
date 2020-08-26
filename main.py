@@ -41,21 +41,20 @@ def create_Model(Chosen_data):
         model1 = RandomForestClassifier(n_estimators=100, criterion='entropy', random_state=0)
         models = model1.fit(X_train, y)
 
-        st.sidebar.subheader("Enter Values For All Variable Here")
-
-        Pregnancies = st.sidebar.slider("Numbers Of Times Pregnant", 0, 30)
-        Glucose = st.sidebar.number_input("Plasma Glucose Concentration in 2 Hours in an Oral Glucose Tolerance Test", 0.000,
+        st.subheader("Enter Values Of Variables For Prediction Here")
+        Pregnancies = st.slider("Numbers Of Times Pregnant", 0, 30)
+        Glucose = st.number_input("Plasma Glucose Concentration in 2 Hours in an Oral Glucose Tolerance Test", 0.000,
                                   500.000)
-        BloodPressure = st.sidebar.number_input("Diastolic Blood Pressure (mm Hg)", 0.000, 500.000)
-        SkinThickness = st.sidebar.number_input("Triceps Skin Fold Thickness (mm)", 0.0000, 500.000)
-        Insulin = st.sidebar.number_input("2-Hours Serum Insulin (muU/ml)", 0.000, 1000.000)
-        BMI = st.sidebar.number_input("Body Mass Index(weight in kg/(height in m)^2)", 0.000, 200.000)
-        DiabetesPedigreeFunction = st.sidebar.number_input("Diabetes Pedigree Function", 0.000, 5.000)
-        Age = st.sidebar.slider("Age", 0, 200)
+        BloodPressure = st.number_input("Diastolic Blood Pressure (mm Hg)", 0.000, 500.000)
+        SkinThickness = st.number_input("Triceps Skin Fold Thickness (mm)", 0.0000, 500.000)
+        Insulin = st.number_input("2-Hours Serum Insulin (muU/ml)", 0.000, 1000.000)
+        BMI = st.number_input("Body Mass Index(weight in kg/(height in m)^2)", 0.000, 200.000)
+        DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function", 0.000, 5.000)
+        Age = st.slider("Age", 0, 200)
 
         transformed_parameters = sc.transform([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
         prediction = models.predict(transformed_parameters)
-        st.subheader("Enter Values For All Variables In The Side Panel Than Click The Predict Button Below")
+        st.subheader("Click The Predict Button Below")
         if st.button("Predict"):
             st.subheader("Note That The Model Has An Accuracy Of 98% Based On Prediction Of Test Data With 768 Different Instances")
             if prediction == 1:
@@ -265,19 +264,19 @@ def create_Model(Chosen_data):
         classifier2.fit(X, y)
 
 
-        st.sidebar.subheader("Enter Values For Wine Features Here")
-        type = st.sidebar.selectbox("Select Type Of Wine", tuple(type_mapping.keys()))
-        fixed_acidity = st.sidebar.number_input("Fixed Acidity", 0.0, 500.0)
-        volatile_acidity = st.sidebar.number_input("Volatile Acidity", 0.000, 500.000)
-        citric_acid = st.sidebar.number_input("Citric Acid", 0.000, 500.000)
-        residual_sugar = st.sidebar.number_input("Residual Sugar", 0.000, 500.000)
-        chlorides = st.sidebar.number_input("chlorides", 0.000, 500.000)
-        free_sulfur_dioxide = st.sidebar.number_input("Free Sulphur Dioxide", 0.000, 500.000)
-        total_sulfur_dioxide = st.sidebar.number_input("Total Sulphur Dioxide", 0.000, 500.000)
-        density = st.sidebar.number_input("Density", 0.000, 500.000)
-        pH = st.sidebar.number_input("ph", 0.000, 500.000)
-        sulphates = st.sidebar.number_input("Sulphates", 0.000, 500.000)
-        alcohol = st.sidebar.number_input("Alcohol", 0.000, 500.000)
+        st.subheader("Enter Values For Wine Features Here")
+        type = st.selectbox("Select Type Of Wine", tuple(type_mapping.keys()))
+        fixed_acidity = st.number_input("Fixed Acidity", 0.0, 500.0)
+        volatile_acidity = st.number_input("Volatile Acidity", 0.000, 500.000)
+        citric_acid = st.number_input("Citric Acid", 0.000, 500.000)
+        residual_sugar = st.number_input("Residual Sugar", 0.000, 500.000)
+        chlorides = st.number_input("chlorides", 0.000, 500.000)
+        free_sulfur_dioxide = st.number_input("Free Sulphur Dioxide", 0.000, 500.000)
+        total_sulfur_dioxide = st.number_input("Total Sulphur Dioxide", 0.000, 500.000)
+        density = st.number_input("Density", 0.000, 500.000)
+        pH = st.number_input("ph", 0.000, 500.000)
+        sulphates = st.number_input("Sulphates", 0.000, 500.000)
+        alcohol = st.number_input("Alcohol", 0.000, 500.000)
 
         def get_value(val,my_dict):
             for key ,value in my_dict.items():
@@ -297,7 +296,7 @@ def create_Model(Chosen_data):
 
 
         now_pred = classifier2.predict(final_choices)
-        st.subheader("Enter Values For Wine Features In The Side Panel Then Click The Predict Button Below")
+        st.subheader("Click The Predict Button Below")
 
         if st.button("Predict"):
 
@@ -334,6 +333,7 @@ def create_Model(Chosen_data):
         Binary = {"Yes": 1, "No": 0}
         sex_pick = {"Male": 1, "Female": 0}
 
+        st.subheader("Enter Values Of Variables For Prediction Here")
         Age = st.slider("Patient's Age", 0, 200)
         Anaemia = st.selectbox("Does Patient Have Anaemia?", tuple(Binary.keys()))
         creatinine = st.number_input("Level Of Creatinine Phosphokinase In Blood", 0.0, 500.0)
@@ -361,6 +361,7 @@ def create_Model(Chosen_data):
         all_variables = [Age, Anaemia_state, creatinine, Diabetic, ejection_fraction, high_blood, platelets, serum_creatinine, serum_sodium, Sex_Patient, Smoking_value, time]
         final_variables = np.array(all_variables).reshape(1, -1)
         predict_it = classifier.predict(final_variables)
+        st.subheader("Click The Predict Button Below")
         if st.button("Predict"):
 
             if predict_it == 0:
@@ -370,6 +371,7 @@ def create_Model(Chosen_data):
 
     if Chosen_data == "Breast Cancer Type":
         st.subheader("Predict Breast Cancer Type")
+        st.image("images.jpeg")
         dataset = pd.read_csv('datasets_180_408_data (1).csv')
         X = dataset.iloc[:, 2:-1]
         y = dataset.iloc[:, 1:2]
@@ -387,37 +389,37 @@ def create_Model(Chosen_data):
         classifier1.fit(X, y)
 
 
-        st.sidebar.subheader("Enter Values For All Variables Here")
-        radius_mean = st.sidebar.number_input("mean of distances from center to points on the perimeter", 0.0, 500.0)
-        texture_mean = st.sidebar.number_input("standard deviation of gray-scale values", 0.0, 500.0)
-        perimeter_mean = st.sidebar.number_input("mean size of the core tumor", 0.0, 500.0)
-        area_mean = st.sidebar.number_input("Area Mean", 0.0, 500.0)
-        smoothness_mean = st.sidebar.number_input("mean of local variation in radius lengths", 0.0, 500.0)
-        compactness_mean = st.sidebar.number_input("mean of perimeter^2 / area - 1.0", 0.0, 500.0)
-        concavity_mean = st.sidebar.number_input("mean of severity of concave portions of the contour", 0.0, 500.0)
-        concave_points_mean = st.sidebar.number_input("mean for number of concave portions of the contour", 0.0, 500.0)
-        symmetry_mean = st.sidebar.number_input("Symmetry Mean", 0.0, 500.0)
-        fractal_dimension_mean = st.sidebar.number_input("mean for coastline approximation - 1", 0.0, 500.0)
-        radius_se = st.sidebar.number_input("standard error for the mean of distances from center to points on the perimeter", 0.0, 500.0)
-        texture_se = st.sidebar.number_input("standard error for standard deviation of gray-scale values", 0.0, 500.0)
-        perimeter_se = st.sidebar.number_input("Perimeter Standard Error", 0.0, 500.0)
-        area_se = st.sidebar.number_input("Area Standard Error", 0.0, 500.0)
-        smoothness_se = st.sidebar.number_input("standard error for local variation in radius lengths", 0.0, 500.0)
-        compactness_se = st.sidebar.number_input("standard error for perimeter^2 / area - 1.0", 0.0, 500.0)
-        concavity_se = st.sidebar.number_input("standard error for severity of concave portions of the contour", 0.0, 500.0)
-        concave_points_se = st.sidebar.number_input("standard error for number of concave portions of the contour", 0.0, 500.0)
-        symmetry_se = st.sidebar.number_input("Symmetry Standard Error", 0.0, 500.0)
-        fractal_dimension_se = st.sidebar.number_input("standard error for 'coastline approximation' - 1", 0.0, 500.0)
-        radius_worst = st.sidebar.number_input("worst or largest mean value for mean of distances from center to points on the perimeter", 0.0, 500.0)
-        texture_worst = st.sidebar.number_input("worst or largest mean value for standard deviation of gray-scale values", 0.0, 500.0)
-        perimeter_worst = st.sidebar.number_input("Perimeter Worst", 0.0, 500.0)
-        area_worst = st.sidebar.number_input("Area Worst", 0.0, 500.0)
-        smoothness_worst = st.sidebar.number_input("worst or largest mean value for local variation in radius lengths", 0.0, 500.0)
-        compactness_worst = st.sidebar.number_input("worst or largest mean value for perimeter^2 / area - 1.0", 0.0, 500.0)
-        concavity_worst = st.sidebar.number_input("worst or largest mean value for severity of concave portions of the contour", 0.0, 500.0)
-        concave_points_worst = st.sidebar.number_input("worst or largest mean value for number of concave portions of the contour", 0.0, 500.0)
-        symmetry_worst = st.sidebar.number_input("Symmetry Worst", 0.0, 500.0)
-        fractal_dimension_worst = st.sidebar.number_input("worst or largest mean value for coastline approximation - 1d", 0.0, 500.0)
+        st.subheader("Enter Values Of Variables For Prediction Here")
+        radius_mean = st.number_input("mean of distances from center to points on the perimeter", 0.0, 500.0)
+        texture_mean = st.number_input("standard deviation of gray-scale values", 0.0, 500.0)
+        perimeter_mean = st.number_input("mean size of the core tumor", 0.0, 500.0)
+        area_mean = st.number_input("Area Mean", 0.0, 500.0)
+        smoothness_mean = st.number_input("mean of local variation in radius lengths", 0.0, 500.0)
+        compactness_mean = st.number_input("mean of perimeter^2 / area - 1.0", 0.0, 500.0)
+        concavity_mean = st.number_input("mean of severity of concave portions of the contour", 0.0, 500.0)
+        concave_points_mean = st.number_input("mean for number of concave portions of the contour", 0.0, 500.0)
+        symmetry_mean = st.number_input("Symmetry Mean", 0.0, 500.0)
+        fractal_dimension_mean = st.number_input("mean for coastline approximation - 1", 0.0, 500.0)
+        radius_se = st.number_input("standard error for the mean of distances from center to points on the perimeter", 0.0, 500.0)
+        texture_se = st.number_input("standard error for standard deviation of gray-scale values", 0.0, 500.0)
+        perimeter_se = st.number_input("Perimeter Standard Error", 0.0, 500.0)
+        area_se = st.number_input("Area Standard Error", 0.0, 500.0)
+        smoothness_se = st.number_input("standard error for local variation in radius lengths", 0.0, 500.0)
+        compactness_se = st.number_input("standard error for perimeter^2 / area - 1.0", 0.0, 500.0)
+        concavity_se = st.number_input("standard error for severity of concave portions of the contour", 0.0, 500.0)
+        concave_points_se = st.number_input("standard error for number of concave portions of the contour", 0.0, 500.0)
+        symmetry_se = st.number_input("Symmetry Standard Error", 0.0, 500.0)
+        fractal_dimension_se = st.number_input("standard error for 'coastline approximation' - 1", 0.0, 500.0)
+        radius_worst = st.number_input("worst or largest mean value for mean of distances from center to points on the perimeter", 0.0, 500.0)
+        texture_worst = st.number_input("worst or largest mean value for standard deviation of gray-scale values", 0.0, 500.0)
+        perimeter_worst = st.number_input("Perimeter Worst", 0.0, 500.0)
+        area_worst = st.number_input("Area Worst", 0.0, 500.0)
+        smoothness_worst = st.number_input("worst or largest mean value for local variation in radius lengths", 0.0, 500.0)
+        compactness_worst = st.number_input("worst or largest mean value for perimeter^2 / area - 1.0", 0.0, 500.0)
+        concavity_worst = st.number_input("worst or largest mean value for severity of concave portions of the contour", 0.0, 500.0)
+        concave_points_worst = st.number_input("worst or largest mean value for number of concave portions of the contour", 0.0, 500.0)
+        symmetry_worst = st.number_input("Symmetry Worst", 0.0, 500.0)
+        fractal_dimension_worst = st.number_input("worst or largest mean value for coastline approximation - 1d", 0.0, 500.0)
 
         inputs_variable = [radius_mean, texture_mean, perimeter_mean, area_mean, smoothness_mean, compactness_mean, concavity_mean, concave_points_mean, symmetry_mean, fractal_dimension_mean, radius_se, texture_se, perimeter_se, area_se, smoothness_se, compactness_se, concavity_se, concave_points_se, symmetry_se, fractal_dimension_se, radius_worst, texture_worst, perimeter_worst, area_worst, smoothness_worst, compactness_worst, concavity_worst, concave_points_worst, symmetry_worst, fractal_dimension_worst]
         show = {"radius_mean":radius_mean, "texture_mean":texture_mean,"perimeter_mean": perimeter_mean,"area_mean": area_mean,"smoothness_mean": smoothness_mean,
@@ -432,7 +434,7 @@ def create_Model(Chosen_data):
         finals = np.array(inputs_variable).reshape(1, -1)
 
         The_pred = classifier1.predict(finals)
-        st.subheader("Enter Values For All Variables In Side Panel Then Click The Diagnose Button Below")
+        st.subheader("Click The Diagnose Button Below")
         if st.button("Diagnose"):
             if The_pred == "M":
                 st.success("Cancer Type Is Malignant")
